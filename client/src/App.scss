@@ -1,0 +1,12 @@
+
+.App {
+  text-align: center;
+
+  .site-body {
+    display: flex;
+  }
+  .site-content {
+    flex: 1 1 auto;
+    padding-top: 150px;
+  }
+}

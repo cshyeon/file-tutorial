@@ -1,0 +1,21 @@
+.site-navigation {
+  display: flex;
+  flex-flow: column wrap;
+  width: 160px;
+
+  box-sizing: border-box;
+  background: grey;
+  padding: 14px 5px;
+
+  & > .router-link {
+    text-decoration: none;
+    background-color: rgb(212, 144, 144);
+    margin: 3px 4px;    
+    padding: 0 6px;
+
+    border-radius: 6px;
+
+    color: white;
+    font-weight: 500;
+  }
+}
