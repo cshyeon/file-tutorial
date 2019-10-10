@@ -39,6 +39,7 @@ async function serverListener(req, res) {
 }
 
 const httpServer = http.createServer(serverListener);
+httpServer.timeout = 5000;
 
 const DEFAULT_PORT = 8000;
 const HttpServer = {
