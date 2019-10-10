@@ -1,3 +1,19 @@
+const multer = require('multer');
+const shortid = require('shortid');
+const { getExtension } = require('../utils');
+
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename(req, file, cb) {
+      cb(null, `${shortid.generate()}${getExtension(file.originalname)}`);
+    },
+  }),
+});
+
 async function webhookRouter(req, res) {
   try {
     return JSON.stringify(123);
@@ -8,13 +24,24 @@ async function webhookRouter(req, res) {
 
 async function imageUploadRouter(req, res) {
   try {
-    console.log(req.file);
+    return new Promise((resolve, reject) => {
+      upload.single('file')(req, {}, (err) => {
+        if (err) reject(err);
 
-    return JSON.stringify('ok img upload router');
+        const { file } = req;
+        const filename = file.originalname;
+        const extension = getExtension(filename);
+        console.log('req.file', req.file);
+
+        resolve('done');
+      });
+    });
   } catch (e) {
+    console.log('err', e);
     throw e;
   }
 }
+
 module.exports = {
   webhookRouter, imageUploadRouter,
 };
